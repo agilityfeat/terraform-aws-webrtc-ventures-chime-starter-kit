@@ -33,6 +33,7 @@ module "vpc" {
 module "acm" {
   count                       = var.use_route53_hostedzone_for_acm == true ? 1 : 0
   source                      = "./modules/acm"
+
   app_domain                  = var.app_domain
   name                        = var.name
   route53_hosted_private_zone = var.route53_hosted.is_private
@@ -46,7 +47,8 @@ module "acm" {
 ## Application LoadBalancer
 ################################################
 module "alb_security_grp" {
-  source        = "./modules/security-grp"
+  source        = "./modules/security-group"
+
   name          = var.name
   unique_id     = var.alb_unique_id
   vpc_id        = module.vpc.vpc_id
