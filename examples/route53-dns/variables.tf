@@ -1,7 +1,7 @@
 variable "name" {
   type        = string
   description = "Project name"
-  default     = "chimestarterkitex1"
+  default     = "chimestarterkitex2"
 }
 variable "aws_region" {
   type        = string
@@ -11,11 +11,11 @@ variable "aws_region" {
 variable "aws_account_id" {
   type        = string
   description = "Current AWS account ID"
-  default     = "223794467814"
+  # default     = "223EXAMPLEID14"
 }
 variable "aws_elb_account_id" {
   type        = string
-  description = "Current AWS ELB Account ID obtain the ID for your region from https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html"
+  description = "Current AWS ELB Account ID obtain the ID for the region you are deploying into. Obtainable from https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html"
   default     = "127311923021" # this one is for us-east-1
 }
 #############################################
@@ -53,7 +53,7 @@ variable "acm_unique_id" {
 variable "use_route53_hostedzone_for_acm" {
   type        = bool
   description = "Indicates whether you are using a route53 hosted zone created in the current account you are using"
-  default     = false
+  default     = true
 }
 variable "route53_hosted" {
   type = object({
@@ -61,22 +61,22 @@ variable "route53_hosted" {
     is_private = bool
   })
   description = "If using Route53, supply the Route53 zone details"
-  default = {
-    zone_id    = null
-    is_private = null
-  }
+  /* default = {
+    zone_id    = "Z062459721LEXAMPLE" # change to your own zone id
+    is_private = false
+  } */
 }
 
 variable "app_domain" {
   type        = string
   description = "If using Route53 supply the domain on which the application will be accessed. It must be the same domain/subsdomain name used to generete the ACM certificate."
-  default     = "chimestarterkit.webrtc.ventures"
+  # default     = "video.example.com"
 }
 
 variable "acm_cert_arn" {
   type        = string
   description = "TLS certificate ARN from the AWS Certicate Manager console"
-  default     = "arn:aws:acm:us-east-1:223794467814:certificate/c479aa09-090c-44b3-ba53-5fcff988cd4b" # "arn:aws:acm:REGION:EXAMPLE:certificate/EXAMPLE423b3-EXAMPLE-CERTIFICATE"
+  default     = null # "arn:aws:acm:REGION:EXAMPLE:certificate/EXAMPLE423b3-EXAMPLE-CERTIFICATE"
 }
 
 ################################################

@@ -11,11 +11,11 @@ variable "aws_region" {
 variable "aws_account_id" {
   type        = string
   description = "Current AWS account ID"
-  default     = "223794467814"
+  # default     = "223EXAMPLEID14"
 }
 variable "aws_elb_account_id" {
   type        = string
-  description = "Current AWS ELB Account ID obtain the ID for your region from https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html"
+  description = "Current AWS ELB Account ID obtain the ID for the region you are deploying into. Obtainable from https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html"
   default     = "127311923021" # this one is for us-east-1
 }
 #############################################
@@ -70,13 +70,13 @@ variable "route53_hosted" {
 variable "app_domain" {
   type        = string
   description = "If using Route53 supply the domain on which the application will be accessed. It must be the same domain/subsdomain name used to generete the ACM certificate."
-  default     = "chimestarterkit.webrtc.ventures"
+  # default     = "chimestarterkit.example.com"
 }
 
 variable "acm_cert_arn" {
   type        = string
   description = "TLS certificate ARN from the AWS Certicate Manager console"
-  default     = "arn:aws:acm:us-east-1:223794467814:certificate/8e373212-40d0-49fe-8525-09a6fedeca15" # "arn:aws:acm:REGION:EXAMPLE:certificate/EXAMPLE423b3-EXAMPLE-CERTIFICATE"
+  default     = null # "arn:aws:acm:REGION:EXAMPLE:certificate/EXAMPLE423b3-EXAMPLE-CERTIFICATE"
 }
 
 ################################################
@@ -255,7 +255,7 @@ variable "asg_unique_id" {
 variable "asg_ami_id" {
   type        = string
   description = "The AMI ID from the product configuration page on AWS Marketplace. You must first subscribe to the product and then click on configuration button to view the AMI details."
-  default     = "ami-0392f984eb68af012"
+  # default     = "ami-0392f984eb68af012" # get the correct upto date ami ID from the AWS market place
 }
 variable "asg_delete_on_termination" {
   type        = bool

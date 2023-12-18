@@ -1,4 +1,4 @@
-# Setting up using an external DNS provider
+# Using an external DNS provider
 This setup shows you an example of how to configure the WebRTC Ventures Chime Starter Kit high availability mode using an external DNS provider.
 
 ## Requirements

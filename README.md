@@ -5,20 +5,19 @@ This setup helps you configure and provision the [**WebRTC Ventures Chime Starte
 > 1. Getting the product AMI ID guide [ObtainAMIID.pdf](https://webrtc-ventures-mkt.s3.amazonaws.com/ObtainAMIID.pdf)
 > <br/>
 
-
 ## Prerequisites
 The following are the prerequisites needed for this setup:
-1. Install Terraform by follow the [instructions here](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
+1. Install Terraform by following the [instructions here](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
 2. Install AWS CLI as [guided here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-3. Configure Terraform for your AWS account by following [this instructions](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-build). Note: you may also use the AWS CLI to setup your credentials by following the [steps here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
+3. Configure Terraform for your AWS account by following [these instructions](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-build). Note: you may also use the AWS CLI to setup your credentials by following the [steps here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
 
 ## Setup
 To provision the application you have two options as documented here:
-1. [Using external DNS not hosted on Route53](https://github.com/agilityfeat/terraform-aws-webrtc-ventures-chime-starter-kit/blob/main/examples/external-dns/README.md)
+1. [Using an external DNS not hosted on Route53](https://github.com/agilityfeat/terraform-aws-webrtc-ventures-chime-starter-kit/blob/main/examples/external-dns/README.md)
 2. [Using AWS Route53 DNS Hostedzone](https://github.com/agilityfeat/terraform-aws-webrtc-ventures-chime-starter-kit/blob/main/examples/external-dns/README.md)
 
-## Extra
-1. If you manage your DNS on AWS Route53, then you can take advantage of the ACM module by setting `use_route53_hostedzone` variable to `true`, supplying the route53 hosted zone details under the `route53_hosted` variable and the hostname under `app_domain`. With this option you **MUST** set the `acm_cert_arn` to null.
+## Additional information
+1. If you manage your DNS on AWS Route53, then you can take advantage of the ACM module by setting `use_route53_hostedzone` variable to `true`, supplying the route53 hosted zone details under the `route53_hosted` variable and the hostname under `app_domain`. With this option you **MUST** ensure the `acm_cert_arn` is set to `null`.
 2. If you manage your DNS in a different DNS provider, you can create an ACM certificate following [this guide](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) and then copy the certificate ARN and put it under `acm_cert_arn` variable. With this option you must set `use_route53_hostedzone` variable to `false` and `route53_hosted` variable to null for each key within the object.
 
 Provisioning this module successfuly will:
