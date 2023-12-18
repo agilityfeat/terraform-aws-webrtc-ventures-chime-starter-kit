@@ -1,5 +1,5 @@
 # Using Route53 Hostedzone in the same Account
-This setup shows you an example of how to configure the WebRTC Ventures Chime Starter Kit high availability mode using a Rout53 Hostedzone created in the same account you will be provisioning this application.
+This setup shows you an example of how to configure the **WebRTC Ventures Chime Starter Kit** high availability mode using a **Rout53 Hostedzone** created in the same account you will be provisioning this application.
 
 ## Requirements
 1. Access to Route53 with permissions to create and modify DNS records.
@@ -39,13 +39,13 @@ Once you have confirmed your variables are set correctly, navigate to the root f
 Once terraform provisions the infrastructure you will get the `application_domain` output value which you can open on your browser to access the application.
 
 ## Additional info:
-I get this output from terraform after successfully creating my resources:
+You will get similar output to this from Terraform after successfully creating all the resources:
 ```bash
 Outputs:
 
 application_domain = "video.chimestarter.example.com"
 
 ```
-Then I can reach my application on: `https://video.chimestarter.example.com`.
+Then you can reach the application on: `https://video.chimestarter.example.com`.
 
 For further help reach out at: [info@webrtc.ventures](mailto:info@webrtc.ventures)
