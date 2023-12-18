@@ -17,15 +17,15 @@ To provision the application you have two options as documented here:
 1. [Using external DNS not hosted on Route53](https://github.com/agilityfeat/terraform-aws-webrtc-ventures-chime-starter-kit/blob/main/examples/external-dns/README.md)
 2. [Using AWS Route53 DNS Hostedzone](https://github.com/agilityfeat/terraform-aws-webrtc-ventures-chime-starter-kit/blob/main/examples/external-dns/README.md)
 
-## Good to know
+## Extra
 1. If you manage your DNS on AWS Route53, then you can take advantage of the ACM module by setting `use_route53_hostedzone` variable to `true`, supplying the route53 hosted zone details under the `route53_hosted` variable and the hostname under `app_domain`. With this option you **MUST** set the `acm_cert_arn` to null.
 2. If you manage your DNS in a different DNS provider, you can create an ACM certificate following [this guide](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) and then copy the certificate ARN and put it under `acm_cert_arn` variable. With this option you must set `use_route53_hostedzone` variable to `false` and `route53_hosted` variable to null for each key within the object.
 
 Provisioning this module successfuly will:
 1. Create an Auto Scaling Group with scaling alarms for CPU usage and optional ones for Network (In and Out) metrics.
 2. An Application LoadBalancer that will ditribute traffic to your instances.
-2. (Optional) If Route53 hosted zone was use, an output of the domain on which you will access your application under `application_domain` output variable.
-3. (Optional) If ACM certificate for TLS was manually created, the output will give you the `lb_dns_value` with which you will create a CNAME record in your DNS management console as its value:
+3. (Optional) If Route53 hosted zone was use, an output of the domain on which you will access your application under `application_domain` output variable.
+4. (Optional) If ACM certificate for TLS was manually created, the output will give you the `lb_dns_value` with which you will create a CNAME record in your DNS management console as its value:
 
     For example if my domain is `example.com` and I want my application to be accessed at `meet.example.com`; then I will create a CNAME record with `meet.example.com` as the record name and `lb_dns_value` output value as its CNAME value.
 

@@ -1,18 +1,9 @@
-# Key pair for ssh for debuging
-resource "aws_key_pair" "main" {
-  key_name   = "${var.name}-ssh-key-${var.unique_id}"
-  public_key = file("${path.module}/keys/id_rsa-${var.unique_id}.pub")
-
-  tags = merge({ Name = "${var.name}-ssh-key-${var.unique_id}" }, var.tags)
-}
-
 # Launch template
 resource "aws_launch_template" "main" {
   name          = "${var.name}-launch-temp-${var.unique_id}"
   image_id      = var.ami_id
   instance_type = var.instance_type
-  key_name      = aws_key_pair.main.key_name
-
+  
   /* 
   iam_instance_profile {
     arn = aws_iam_instance_profile.main.arn

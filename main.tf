@@ -34,7 +34,6 @@ module "acm" {
   count                       = var.use_route53_hostedzone_for_acm == true ? 1 : 0
   source                      = "./modules/acm"
   app_domain                  = var.app_domain
-  environment                 = local.env
   name                        = var.name
   route53_hosted_private_zone = var.route53_hosted.is_private
   route53_hosted_zone_id      = var.route53_hosted.zone_id

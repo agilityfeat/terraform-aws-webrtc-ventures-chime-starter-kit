@@ -1,18 +1,22 @@
 variable "name" {
   type        = string
-  description = "Project name used to form part of most resource names. This will identify your created resources."
+  description = "Project name"
+  default     = "chimestarterkitex1"
 }
 variable "aws_region" {
   type        = string
-  description = "AWS Region where the resources will be provisioned"
+  description = "AWS Region"
+  default     = "us-east-1"
 }
 variable "aws_account_id" {
   type        = string
   description = "Current AWS account ID"
+  default     = "223794467814"
 }
 variable "aws_elb_account_id" {
   type        = string
   description = "Current AWS ELB Account ID obtain the ID for your region from https://docs.aws.amazon.com/elasticloadbalancing/latest/application/enable-access-logging.html"
+  default     = "127311923021" # this one is for us-east-1
 }
 #############################################
 # VPC
@@ -20,7 +24,7 @@ variable "aws_elb_account_id" {
 variable "vpc_cidr" {
   type        = string
   description = "Main VPC CIDR"
-  default     = "172.18.0.0/16"
+  default     = "173.18.0.0/16"
 }
 variable "vpc_name" {
   type        = string
@@ -30,12 +34,12 @@ variable "vpc_name" {
 variable "vpc_private_subnets" {
   type        = list(string)
   description = "VPC Private subnet CIDRs"
-  default     = ["172.18.48.0/20", "172.18.64.0/20", "172.18.80.0/20"]
+  default     = ["173.18.48.0/20", "173.18.64.0/20", "173.18.80.0/20"]
 }
 variable "vpc_public_subnets" {
   type        = list(string)
   description = "VPC Public subnet CIDRs"
-  default     = ["172.18.96.0/20", "172.18.112.0/20", "172.18.128.0/20"]
+  default     = ["173.18.96.0/20", "173.18.112.0/20", "173.18.128.0/20"]
 }
 
 #######################################
@@ -44,6 +48,7 @@ variable "vpc_public_subnets" {
 variable "acm_unique_id" {
   type        = string
   description = "Unique id to be appended on ACM resource names."
+  default     = "acm-prod"
 }
 variable "use_route53_hostedzone_for_acm" {
   type        = bool
@@ -56,22 +61,22 @@ variable "route53_hosted" {
     is_private = bool
   })
   description = "If using Route53, supply the Route53 zone details"
-  # default = {
-  #   zone_id    = "EXAMPLE_ZONE_ID"
-  #   is_private = false
-  # }
+  default = {
+    zone_id    = null
+    is_private = null
+  }
 }
 
 variable "app_domain" {
   type        = string
   description = "If using Route53 supply the domain on which the application will be accessed. It must be the same domain/subsdomain name used to generete the ACM certificate."
-  default     = null # example: "dev.example.com"
+  default     = "chimestarterkit.webrtc.ventures"
 }
 
 variable "acm_cert_arn" {
   type        = string
-  description = "TLS certificate ARN from the AWS Certicate Manager console if you created the TLS certificate manually. Depends on the `use_route53_hostedzone_for_acm` variable. Format: arn:aws:acm:REGION:EXAMPLE:certificate/EXAMPLE423b3-EXAMPLE-CERTIFICATE"
-  default     = null
+  description = "TLS certificate ARN from the AWS Certicate Manager console"
+  default     = "arn:aws:acm:us-east-1:223794467814:certificate/8e373212-40d0-49fe-8525-09a6fedeca15" # "arn:aws:acm:REGION:EXAMPLE:certificate/EXAMPLE423b3-EXAMPLE-CERTIFICATE"
 }
 
 ################################################
@@ -80,6 +85,7 @@ variable "acm_cert_arn" {
 variable "alb_unique_id" {
   type        = string
   description = "The unique string to identify LoadBalancer module resources; appended on the resource names."
+  default     = "alb-prod"
 }
 variable "alb_deregistration_delay" {
   type        = number
@@ -109,11 +115,11 @@ variable "alb_health_check_healthy_threshold" {
 variable "alb_health_check_matcher" {
   type        = string
   description = "Response codes to use when checking for a healthy responses from a target"
-  default     = "200,201,301,302"
+  default     = "200,201,300,301"
 }
 variable "alb_health_check_path" {
   type        = string
-  description = "Destination for the health check request"
+  description = "The healthcheck path to be queries by the LoadBalancer."
   default     = "/"
 }
 variable "alb_health_check_port" {
@@ -184,7 +190,7 @@ variable "alb_sec_grp_ingress" {
     self             = bool
   }))
   description = "A list of ingress rule as objects for the ALB security group"
-  /* default = [
+  default = [
     {
       cidr_blocks      = ["0.0.0.0/0"]
       description      = "HTTP"
@@ -207,7 +213,7 @@ variable "alb_sec_grp_ingress" {
       to_port          = 443
       self             = null
     }
-  ] */
+  ]
 }
 variable "alb_sec_grp_egress" {
   type = list(object({
@@ -222,7 +228,7 @@ variable "alb_sec_grp_egress" {
     self             = bool
   }))
   description = "A list of egress rule as objects for the ALB security group"
-  /* default = [
+  default = [
     {
       cidr_blocks      = ["0.0.0.0/0"]
       description      = "Everywhere"
@@ -234,7 +240,7 @@ variable "alb_sec_grp_egress" {
       to_port          = 0
       self             = null
     }
-  ] */
+  ]
 }
 
 
@@ -244,19 +250,21 @@ variable "alb_sec_grp_egress" {
 variable "asg_unique_id" {
   type        = string
   description = "The unique string to identify ASG module resources; appended on the resource names."
+  default     = "asg-prod"
 }
 variable "asg_ami_id" {
   type        = string
   description = "The AMI ID from the product configuration page on AWS Marketplace. You must first subscribe to the product and then click on configuration button to view the AMI details."
+  default     = "ami-0392f984eb68af012"
 }
 variable "asg_delete_on_termination" {
   type        = bool
-  description = "Whether to delete attached ELB volume on instance termination"
+  description = "Delete ELB volume on instance termination"
   default     = true
 }
 variable "asg_detailed_monitoring" {
   type        = bool
-  description = "Whether to enable detailed monitoring of the instances in the ASG"
+  description = "Enable detailed monitoring of the instances in the ASG"
   default     = true
 }
 variable "asg_disk_size" {
@@ -274,6 +282,7 @@ variable "asg_health_check_type" {
   description = "The healthcheck type used by ASG. Can be ELB or EC2"
   default     = "ELB"
 }
+
 variable "asg_instance_type" {
   type        = string
   description = "The instance type used by ASG on the launced instances"
@@ -377,7 +386,7 @@ variable "asg_sec_grp_ingress" {
     self             = bool
   }))
   description = "A list of ingress rule as objects for the ASG security group"
-  /* default = [
+  default = [
     {
       cidr_blocks      = ["0.0.0.0/0"]
       description      = "HTTP"
@@ -400,7 +409,7 @@ variable "asg_sec_grp_ingress" {
       to_port          = 443
       self             = null
     }
-  ] */
+  ]
 }
 variable "asg_sec_grp_egress" {
   type = list(object({
@@ -415,7 +424,7 @@ variable "asg_sec_grp_egress" {
     self             = bool
   }))
   description = "A list of egress rule as objects for the ASG security group"
-  /* default = [
+  default = [
     {
       cidr_blocks      = ["0.0.0.0/0"]
       description      = "Everywhere"
@@ -427,5 +436,5 @@ variable "asg_sec_grp_egress" {
       to_port          = 0
       self             = null
     }
-  ] */
+  ]
 }

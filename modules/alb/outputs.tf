@@ -8,7 +8,7 @@ output "target_group_name" {
 }
 output "domain" {
   description = "LoadBalancer mapped domain/subdomain. Depends on whether Rout53 was used or not."
-  value       = try(var.app_domain, "")
+  value       = var.app_domain != null && var.route53_hosted_zone_id != null ? var.app_domain : null
 }
 output "dns_name" {
   description = "The LoadBalancer DNS name from created by ELB. Used to map the domain name for accessing the application."

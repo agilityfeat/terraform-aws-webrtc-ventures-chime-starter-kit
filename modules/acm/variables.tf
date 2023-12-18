@@ -2,10 +2,6 @@ variable "name" {
   type        = string
   description = "Project name"
 }
-variable "environment" {
-  type        = string
-  description = "Current environment - linked to terraform workspaces"
-}
 variable "app_domain" {
   type        = string
   description = "Domain name for the acm certificate's domain"
@@ -15,7 +11,6 @@ variable "subject_alternative_names" {
   description = "The additional SANs for the acm certificate - subject name alternatives"
   default     = null
 }
-
 variable "route53_hosted_zone_id" {
   type        = string
   description = "Hosted zone id from Route53"
