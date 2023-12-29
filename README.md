@@ -31,4 +31,4 @@ Provisioning this module successfuly will do the following:
 With your DNS correctly updated you can reach your application on the configured domain.
 
 ## Conclusions
-For any inquiries and questions contact our team at [info@webrtc.ventures](mailto:info@webrtc.ventures).
+For any inquiries and questions contact our team at [team@webrtc.ventures](mailto:team@webrtc.ventures).
