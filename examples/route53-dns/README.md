@@ -48,4 +48,4 @@ application_domain = "video.chimestarter.example.com"
 ```
 Then you can reach the application on: `https://video.chimestarter.example.com`.
 
-For further help reach out at: [info@webrtc.ventures](mailto:info@webrtc.ventures)
+For further help reach out at: [team@webrtc.ventures](mailto:team@webrtc.ventures)
