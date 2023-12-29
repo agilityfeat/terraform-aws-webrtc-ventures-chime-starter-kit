@@ -50,4 +50,4 @@ If you created an ACM certificate based on the subdomain `chimestarter.example.c
 
 To learn how to create a CNAME record correctly on your DNS provider, kindly refer to the DNS provider specific documentation.
 
-For further help reach out at: [info@webrtc.ventures](mailto:info@webrtc.ventures).
+For further help reach out at: [team@webrtc.ventures](mailto:team@webrtc.ventures).
